@@ -2,8 +2,9 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var axios = require('axios');
-var fs = require("fs");
+var fs = require("fs")
 
+console.log(keys.spotify)
 
 var command = process.argv[2]
 var searchThis = [];
@@ -29,15 +30,12 @@ switch (command) {
     default: 
     console.log('Command not recognized. Please use one of the following commands concert-this, spotify-this-song, movie-this or do-what-is-says')
     }
-    
-    
-
 
 function spotifyThis() {
     var spotify = new Spotify(keys.spotify);
     var musicSearch = process.argv[3];
     
-    spotify.search({ type: 'track', query: 'musicSearch', limit: 1}, function(err, data) {
+    spotify.search({ type: 'track', query: musicSearch, limit: 1}, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
         }
@@ -98,13 +96,7 @@ function doWhatItSays(){
 
         var arr = data.split(", ");
 
-        if (arr[0] == "spotify-this-song") {
-            spotifyThis(arr[1]);
-        } else if (arr[0] == "movie-this") {
-            movieThis(arr[1]);
-        } else {
-            concertThis(arr[1]);
-        }
+        console.log(arr)
         });
 
     }
